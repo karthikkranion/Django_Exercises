@@ -1,0 +1,29 @@
+{% extends "my_qrscan/base.html" %}
+{% block content %}
+<h1>Scanner Page</h1>
+<div class="center-container">
+  <div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="mobile_number" placeholder="Enter a 10 digit Mobile Number" required pattern="\d{10}" />
+      <input type="file" name="qr_image" accept="image/*" id="qr_input">
+      <button type="submit">Scan</button>
+    </form>
+
+    <!-- Display error if any -->
+    {% if error %}
+      <p style="color:red; margin-top:10px;">{{ error }}</p>
+    {% endif %}
+
+    <!-- Display message if QR matches or info -->
+    {% if message %}
+      <p style="color:green; margin-top:10px;">{{ message }}</p>
+    {% endif %}
+
+    <!-- Display scanned QR data -->
+    {% if qr_data %}
+      <p style="margin-top:10px;"><strong>QR Data:</strong> {{ qr_data }}</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

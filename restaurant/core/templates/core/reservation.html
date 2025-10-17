@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+{% block title %}Reservation{% endblock title %}
+{% block navbar %}
+  {% include 'core/components/navbar.html' %}
+{% endblock navbar %}
+{% block maincontent %}
+<!-- Reservation Section -->
+<section class="py-5" style="background-color: #fff8e6;">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4" style="color: #a35c00;">Make a Reservation</h2>
+    <form class="mx-auto" style="max-width: 600px;">
+      <!-- Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label fw-semibold">Your Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <!-- Date -->
+      <div class="mb-3">
+        <label for="date" class="form-label fw-semibold">Reservation Date</label>
+        <input type="date" class="form-control" id="date" required>
+      </div>
+
+      <!-- Time -->
+      <div class="mb-3">
+        <label for="time" class="form-label fw-semibold">Time</label>
+        <input type="time" class="form-control" id="time" required>
+      </div>
+
+      <!-- Number of Guests -->
+      <div class="mb-3">
+        <label for="guests" class="form-label fw-semibold">Number of Guests</label>
+        <input type="number" class="form-control" id="guests" min="1" max="20" placeholder="e.g. 4" required>
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="mb-4">
+        <label for="mobile" class="form-label fw-semibold">Mobile Number</label>
+        <input type="tel" class="form-control" id="mobile" placeholder="e.g. +91 98765 43210" required>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-warning w-100 fw-bold">Reserve Now</button>
+    </form>
+  </div>
+</section>
+{% endblock maincontent %}
+{% block footer %}
+  {% include 'core/components/footer.html' %}
+{% endblock footer %}

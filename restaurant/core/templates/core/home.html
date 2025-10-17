@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% block title %}Home{% endblock title %}
+
+{% block navbar %}
+  {% include 'core/components/navbar.html' %}
+{% endblock navbar %}
+{% block hero %}
+<!-- Full-width wrapper with background color -->
+<div style="background-color: rgb(222, 195, 159);border-top: 1px solid;">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <!-- Left: Text Content -->
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3" style="color: rgba(123, 81, 4, 0.878);">Enjoy Delicious Traditional Food</h2>
+        <p class="lead">
+          Discover the rich flavors of time-honored recipes that bring comfort and joy to every bite. From sizzling spices to slow-cooked perfection, our traditional dishes are crafted with love and heritage. Whether you're craving a classic thali or a cheesy pizza twist, we've got something to satisfy every palate.
+        </p>
+        <a href="#" class="btn btn-lg mt-3" style="border-radius: 20px; background-color: rgb(218, 160, 52);">Order Now</a>
+      </div>
+
+      <!-- Right: Pizza Image -->
+      <div class="col-md-6 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/1404/1404945.png" alt="Delicious Pizza" class="img-fluid" style="max-height: 300px;">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock hero %}
+{% block maincontent %}
+<!-- Main Content Area -->
+<div class="py-5" style="background-color: hwb(39 60% 9%);">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-5" style="color:rgba(123, 81, 4, 0.878)">Our Signature Dishes</h2>
+    <div class="row g-4">
+     {% for dish in foods %}  
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{dish.image}}"
+               alt="Chicken Biryani"
+               class="card-img-top"
+               style="height: 220px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{dish.name}}</h5>
+            <p class="card-text">{{dish.text}}</p>
+            <span class="price">${{dish.price}}</span>
+            <a href="#" class="btn btn-warning mt-auto">Order Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %} 
+    </div>
+  </div>
+</div>
+
+<!-- Full-width About Us Section -->
+<div style="background-color: #fef8ec; width: 100%;">
+  <div class="container py-5 text-center">
+    <h2 class="fw-bold mb-4" style="color: #efb94d;">About Us</h2>
+    <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+      Welcome to our food haven, where tradition meets freshness. At <strong>MyShop</strong>, we take pride in serving authentic, home-style meals crafted with love and locally sourced ingredients. From spicy biryanis to crispy dosas, every dish is a celebration of flavor. We also offer a vibrant selection of fresh fruits and vegetables—handpicked daily to bring health and taste to your table. Whether you're here for a hearty meal or wholesome produce, we’re committed to quality, warmth, and satisfaction.
+    </p>
+    <img src="https://images.pexels.com/photos/3025236/pexels-photo-3025236.jpeg?auto=compress&cs=tinysrgb&h=400"
+         alt="Fresh Fruits and Vegetables"
+         class="img-fluid mt-4 rounded"
+         style="max-width: 700px;">
+  </div>
+</div>
+<section style="background-color: hwb(43 90% 0% / 0.964); width: 100%;">
+  <div class="container py-5 text-center">
+    <h3 class="fw-bold mb-3" style="color: #a35c00;">Chef's Note</h3>
+    <p class="lead mx-auto" style="max-width: 750px;">
+      Dear Guest,<br><br>
+      Thank you for visiting <strong>Karthik Kazana</strong>. Every dish we prepare is a labor of love, inspired by the flavors of our heritage and the joy of sharing good food. From the first sprinkle of spice to the final garnish, we cook with care, passion, and a deep respect for tradition. Whether you're enjoying a comforting dosa or a vibrant fruit salad, know that it's made with the same warmth we’d offer in our own home.<br><br>
+      We hope your experience is not just delicious—but memorable.
+    </p>
+    <p class="fw-semibold" style="color: #a35c00;">— Chef Karthik, Head Culinary Artist</p>
+  </div>
+</section>
+
+{% endblock %}
+{% block footer %}
+  {% include 'core/components/footer.html' %}
+{% endblock footer %}

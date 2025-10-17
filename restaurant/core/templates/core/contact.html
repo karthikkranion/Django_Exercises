@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% block title %}Contact{% endblock title %}
+{% block navbar %}
+  {% include 'core/components/navbar.html' %}
+{% endblock navbar %}
+{% block maincontent %}
+
+<!-- Full-width Contact Section -->
+<!-- Full-width Contact Section -->
+<section style="background-color: #fff8e6; width: 100%;">
+  <div class="container py-5">
+    <h2 class="text-center fw-bold mb-5" style="color: #a35c00;">Contact Us</h2>
+
+    <!-- Location -->
+    <div class="mb-4 text-center">
+      <h5 class="fw-bold" style="color: #8b5c00;">📍 Location</h5>
+      <p>123 Market Street,<br>Avanashi, Tamil Nadu<br>India - 641654</p>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="mb-4 text-center">
+      <h5 class="fw-bold" style="color: #8b5c00;">📞 Contact Information</h5>
+      <p>Email: support@myhsp.com<br>Phone: +91 98765 82109</p>
+    </div>
+
+    <!-- Opening Hours -->
+    <div class="mb-4 text-center">
+      <h5 class="fw-bold" style="color: #8b5c00;">⏰ Opening Hours</h5>
+      <p>Monday – Saturday: 9:00 AM – 9:00 PM<br>Sunday: 10:00 AM – 10:00 PM</p>
+    </div>
+
+  </div>
+</section>
+{% endblock maincontent %}
+{% block footer %}
+  {% include 'core/components/footer.html' %}
+{% endblock footer %}

@@ -1,0 +1,35 @@
+{% extends "my_qrscan/base.html" %}
+{% block content %}
+<h1>Generate QR Page</h1>
+
+<div class="center-container">
+  <div class="container">
+    <form action="" method="post">
+      {% csrf_token %}
+      <input type="text" name="upi_id" placeholder="Enter your UPI-ID" required/>   
+      <input type="text" name="mobile_number" placeholder="Enter a 10 digit Mobile Number" required pattern="\d{10}" />
+      <input type="text" name="qr_data" placeholder="Enter Text" required />
+      <button type="submit">Generate</button>
+    </form>
+
+    <!-- Display error message if exists -->
+    {% if error %}
+      <p style="color:red; margin-top:10px;">{{ error }}</p>
+    {% endif %}
+
+    <!-- Display generated QR -->
+    {% if file_path %}
+      <div style="margin-top:20px; text-align:center;">
+        <h3>Generated QR Code:</h3>
+        <img src="{{ file_path }}" alt="QR Code" style="width:200px;height:200px; margin-bottom:10px;">
+        <br>
+        <a href="{{ file_path }}" download="QR_{{ mobile_number }}.png">
+          <button type="button">Download QR</button>
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

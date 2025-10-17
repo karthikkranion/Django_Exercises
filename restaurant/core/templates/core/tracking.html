@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Order Tracking{% endblock title %}
+
+{% block navbar %}
+  {% include 'core/components/navbar.html' %}
+{% endblock navbar %}
+
+{% block maincontent %}
+<section class="py-5" style="background-color: #f0f8ff;">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4" style="color: #007bff;">Track Your Order</h2>
+
+    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+      <div class="card-body">
+        <h5 class="card-title">Order ID: <span class="text-muted">#123456</span></h5>
+        <p class="card-text">Estimated Delivery: <strong>Today, 6:30 PM</strong></p>
+
+        <!-- Progress Bar -->
+        <div class="progress mb-4" style="height: 25px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            Out for Delivery
+          </div>
+        </div>
+
+        <!-- Status Timeline -->
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i> Order Confirmed</li>
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i> Preparing</li>
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i> Out for Delivery</li>
+          <li class="list-group-item"><i class="bi bi-clock-fill text-secondary me-2"></i> Delivered (Pending)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock maincontent %}
+
+{% block footer %}
+  {% include 'core/components/footer.html' %}
+{% endblock footer %}

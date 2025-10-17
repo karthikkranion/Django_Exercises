@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Your Cart{% endblock title %}
+{% block navbar %}
+  {% include 'core/components/navbar.html' %}
+{% endblock navbar %}
+
+{% block maincontent %}
+<section class="py-5" style="background-color: #fff8e6;">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Your Cart</h2>
+    <div class="row g-4">
+      {% for item in cart_items %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ item.image }}" class="card-img-top" alt="{{ item.name }}" style="height: 220px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">Price: ₹{{ item.price }}</p>
+            <a href="#" class="btn btn-danger w-100">Remove</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock maincontent %}
+{% block footer %}
+  {% include 'core/components/footer.html' %}
+{% endblock footer %}
