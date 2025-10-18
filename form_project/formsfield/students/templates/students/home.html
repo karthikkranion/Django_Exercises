@@ -1,0 +1,112 @@
+{% extends 'students/base.html' %}
+{% load widget_filters %}
+
+{% block leftcontent %}
+<h2 class="text-center">Welcome to Students Profile Home Page</h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+
+            {% if field|widget_type == "RadioSelect" %}
+                {% for radio in field %}
+                    <div class="form-check form-check-inline">
+                        {{ radio.tag }}
+                        <label class="form-check-label">{{ radio.choice_label }}</label>
+                    </div>
+                {% endfor %}
+
+            {% elif field|widget_type == "CheckboxSelectMultiple" %}
+                {% for checkbox in field %}
+                    <div class="form-check">
+                        {{ checkbox.tag }}
+                        <label class="form-check-label">{{ checkbox.choice_label }}</label>
+                    </div>
+                {% endfor %}
+
+            {% elif field|widget_type == "File" %}
+                {{ field }}
+
+                {% if field.name == "profile_image" %}
+                    <img id="preview"
+                         src="{% if form.instance.profile_image %}{{ form.instance.profile_image.url }}{% endif %}"
+                         class="img-thumbnail mt-2"
+                         width="150"
+                         {% if not form.instance.profile_image %}style="display:none;"{% endif %}>
+                {% elif field.name == "file" %}
+                    {{ field }}
+                    {% if form.instance.file %}
+                        <div class="mt-2">
+                            <p><strong>Uploaded:</strong> {{ form.instance.file.name }}</p>
+                            <a href="{{ form.instance.file.url }}" download class="btn btn-outline-primary btn-sm">Download current file</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+            {% else %}
+                {{ field }}
+            {% endif %}
+
+            {% if field.help_text %}
+                <div class="form-text">{{ field.help_text }}</div>
+            {% endif %}
+
+            {% for error in field.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- JS for live image preview -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const profileImageInput = document.getElementById("id_profile_image");
+        const previewImage = document.getElementById("preview");
+
+        if (profileImageInput && previewImage) {
+            profileImageInput.addEventListener("change", function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.setAttribute("src", e.target.result);
+                        previewImage.style.display = "block";
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    previewImage.setAttribute("src", "");
+                    previewImage.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
+{% endblock leftcontent %}
+
+{% block rightcontent %}
+<h4 class="text-center mb-3"><u>List of Candidates</u></h4>
+<ul class="list-group">
+    {% for candidate in candidates %}
+        <li class="list-group-item">
+            {{ candidate.id }} - 
+            <a href="{% url 'candidate_detail' candidate.id %}" style="text-decoration:none;">
+                {{ candidate.name }}
+            </a>
+        </li>
+    {% empty %}
+        <li class="list-group-item">No candidates available.</li>
+    {% endfor %}
+</ul>
+{% endblock rightcontent %}

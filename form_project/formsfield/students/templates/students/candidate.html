@@ -1,0 +1,45 @@
+{% extends 'students/base.html' %}
+{% load static %}
+
+{% block leftcontent %}
+<h2 class="text-center mb-4">Candidate Details</h2>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4 text-center">
+       
+        {% if candidate.profile_image %}
+          <img src="{{ candidate.profile_image.url }}" class="img-thumbnail mb-3" width="150" alt="Profile Image">
+        {% else %}
+          <img src="{% static 'images/default_profile.png' %}" class="img-thumbnail mb-3" width="150" alt="Default Image">
+        {% endif %}
+      </div>
+      
+      <div class="col-md-8">  
+        <span style="color:blue"> <b>Application Number : {{candidate.id}} </b></span>   
+        <hr>      
+        <h4>{{ candidate.name }}</h4> 
+        <p><strong>Date of Birth:</strong> {{ candidate.dob }}</p>
+        <p><strong>Gender:</strong> {{ candidate.gender }}</p>
+        <p><strong>Locality:</strong> {{ candidate.locality }}</p>
+        <p><strong>City:</strong> {{ candidate.city }}</p>
+        <p><strong>Pin Code:</strong> {{ candidate.pin }}</p>
+        <p><strong>State:</strong> {{ candidate.state }}</p>
+        <p><strong>Mobile:</strong> {{ candidate.mobile }}</p>
+        <p><strong>Email:</strong> {{ candidate.email }}</p>
+        <p><strong>Preferred Job City:</strong> {{ candidate.job_city }}</p>
+        <p><strong>Uploaded:</strong> <a href="{{candidate.file.url}}">Download</a> <sub>{{candidate.file.name}}</sub> </p>
+        <!-- {% if candidate.file %}
+          <p><strong>Resume:</strong> <a href="{{ candidate.file.url }}" download class="btn btn-outline-primary btn-sm">Download</a></p>
+        {% endif %} -->
+        <a href="/"><button class="btn btn-danger">Back to Home</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock leftcontent %}
+
+{% block rightcontent %}
+
+{% endblock rightcontent %}
