@@ -1,0 +1,65 @@
+{% extends 'book/base.html' %}
+
+{% block title %}
+    Book List
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- ✅ Display success/error/info messages -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <!-- ✅ End messages -->
+
+    <h2 class="mb-4">Books</h2>
+
+    <!-- filter buttons -->
+    <div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
+      {% for genre in genres %}
+        {% if genre|lower == current_genre %}
+          <a href="?genre={{ genre|lower }}" class="btn btn-primary active">{{ genre }}</a>
+        {% else %}
+          <a href="?genre={{ genre|lower }}" class="btn btn-outline-primary">{{ genre }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for book in books %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h6>
+                    <p class="card-text text-truncate">{{ book.description }}</p>
+                    <p class="mb-1"><strong>Genre:</strong> {{ book.genre }}</p>
+
+                    <div class="mt-auto">
+                        <a href="{% url 'book-detail' book.pk %}" class="btn btn-primary w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No books available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ✅ Optional: Auto-hide message after 2 seconds -->
+<!-- <script>
+  setTimeout(() => {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      alert.classList.remove('show');
+    });
+  }, 2000); // hide after 2s
+</script> -->
+{% endblock %}

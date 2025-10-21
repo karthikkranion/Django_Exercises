@@ -1,0 +1,27 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title">{{ book.title }}</h3>
+                    <h5 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h5>
+                   
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item"><strong>Description: </strong>{{ book.description }}</li>
+                        <li class="list-group-item"><strong>Genre:</strong> {{ book.genre }}</li>
+                        <li class="list-group-item"><strong>ISBN:</strong> {{ book.isbn }}</li>
+                        <li class="list-group-item"><strong>Publication Date:</strong> {{ book.publication_date }}</li>
+   
+                    </ul>
+                    <a href="{% url 'book-update' book.pk %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url  'book-delete' book.pk %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'book-list' %}" class="btn btn-secondary">Back to Books</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
