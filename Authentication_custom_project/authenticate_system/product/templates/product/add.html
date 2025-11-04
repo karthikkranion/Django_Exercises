@@ -1,0 +1,30 @@
+{% extends "account/base.html" %}
+{% block title %}
+  Product
+{% endblock title %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4 fw-bold">Product List</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="post" class="p-4 bg-light rounded shadow-sm">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+                <div class="form-text">{{ field.help_text }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary w-100">💾 Save</button>
+</form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

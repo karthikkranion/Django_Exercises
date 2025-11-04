@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account Activated</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    body {
+      background-color: rgb(122,119,119);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card-custom {
+      background: rgba(0,0,0,0.25);
+      border-radius: 10px;
+      padding: 35px;
+      backdrop-filter: blur(5px);
+      width: 100%;
+      max-width: 460px;
+    }
+    .social-icons a {
+      color: white;
+      font-size: 26px;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+    .social-icons a:hover {
+      color: #ffcccc;
+      transform: scale(1.2);
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="card-custom text-center">
+    <i class="bi bi-check-circle-fill" style="font-size:50px; color:#00ff5a;"></i>
+    <h2 class="mt-3"><a href="{{activation_url}}">Account Activated 🎉</a></h2>
+    <p class="mt-2">Your account has been verified successfully. You can now login and enjoy our services.</p>
+
+    <a href="{% url 'login' %}" class="btn btn-light w-100 mt-3 fw-bold">
+      Go to Login
+    </a>
+
+    <hr class="mt-4" style="border-color: rgba(255,255,255,0.3)">
+    <p class="fw-bold">Follow Us On</p>
+
+    <div class="social-icons text-center">
+      <a href="https://www.facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="bi bi-youtube"></i></a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

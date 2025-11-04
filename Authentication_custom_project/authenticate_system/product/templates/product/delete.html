@@ -1,0 +1,18 @@
+{% extends "account/base.html" %}
+{% block title %}
+  Product
+{% endblock title %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4 fw-bold">Product List</h1>
+
+  <div class="alert alert-warning text-center">
+    <p class="mb-3">⚠️ Are you sure you want to delete <strong>{{ product.name }}</strong>?</p>
+    <form action="" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger me-2">🗑️ Confirm</button>
+      <a href="{% url 'product:product_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock content %}

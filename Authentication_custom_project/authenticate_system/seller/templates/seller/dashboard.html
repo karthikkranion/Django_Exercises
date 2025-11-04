@@ -1,0 +1,20 @@
+{% extends "account/base.html" %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<h1 class="text-center" >Seller Dashboard</h1>
+<hr>
+<ul class="nav flex-column">
+{% if perms.product.view_product %}  
+  <li class="nav-item">
+    <a class="btn btn-primary text-white mb-2" href="{% url 'product:product_list' %}">Product List</a>
+  </li>
+   {% endif %}
+  {% if perms.product.add_product %}
+    <li class="nav-item">
+    <a class="btn btn-success text-white mb-2" href="{% url 'product:product_add' %}">Product Add</a>
+  </li>
+  {% endif %}
+  
+</ul>
+{% endblock %}

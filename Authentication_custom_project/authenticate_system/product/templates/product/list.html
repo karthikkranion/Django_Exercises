@@ -1,0 +1,20 @@
+{% extends "account/base.html" %}
+{% block title %}
+  Product
+{% endblock title %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4 fw-bold">Product List</h1>
+
+  <ul class="list-group">
+    {% for product in products %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>{{ product.name }}</span>
+        <a href="{% url 'product:product_detail' product.pk %}" class="btn btn-sm btn-primary">View</a>
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">No products available.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}
