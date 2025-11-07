@@ -1,0 +1,25 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+  <h1 class="text-warning">All Song Data</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Song Duration</th>
+          <th>Sung By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for song in songs %}
+        <tr>
+          <td>{{ song.stitle }}</td>
+          <td>{{ song.sduration }}</td>
+          <td>{{ song.written_by }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}

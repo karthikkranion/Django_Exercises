@@ -1,0 +1,27 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+  <h1 class="text-success">All Page Data</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Page Name</th>
+          <th>Page Category</th>
+          <th>Published</th>
+          <th>Created By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for page in pages %}
+        <tr>
+          <td>{{ page.pname }}</td>
+          <td>{{ page.pcat }}</td>
+          <td>{{ page.ppublished }}</td>
+          <td>{{ page.user }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}

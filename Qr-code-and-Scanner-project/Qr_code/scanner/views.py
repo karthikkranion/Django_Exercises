@@ -3,11 +3,11 @@ from pathlib import Path
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from .models import Qrcode
-import qrcode
+import qrcode #type:ignore
 from io import BytesIO
 from django.core.files.base import ContentFile
-from pyzbar.pyzbar import decode
-from PIL import Image
+from pyzbar.pyzbar import decode  #type:ignore
+from PIL import Image  #type:ignore
 import os
 # Create your views here.
 def generate_qr(request):

@@ -1,0 +1,75 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+  <h1 class="text-danger">All Users</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h1 class="text-secondary">Users Filtered by Email</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users1 %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h1 class="text-success">Users Filtered by Page Category</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users2 %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
