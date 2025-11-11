@@ -8,7 +8,7 @@ class Book(models.Model):
     GENRE_CHOICES =[
         ('Fiction','Fiction'),
         ('Non-Fiction','Non-Fiction'),
-        ('Sceince','Sceince'),
+        ('Science','Science'),
         ('Art','Art'),
         ('Technology','Technology'),
         ('History','History'),

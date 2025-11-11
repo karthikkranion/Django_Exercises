@@ -7,7 +7,6 @@
 {% block content %}
 <div class="container mt-4">
 
-    <!-- ✅ Display success/error/info messages -->
     {% if messages %}
       {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -16,17 +15,16 @@
         </div>
       {% endfor %}
     {% endif %}
-    <!-- ✅ End messages -->
 
     <h2 class="mb-4">Books</h2>
 
-    <!-- filter buttons -->
+    <!-- Genre filter buttons -->
     <div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
       {% for genre in genres %}
-        {% if genre|lower == current_genre %}
-          <a href="?genre={{ genre|lower }}" class="btn btn-primary active">{{ genre }}</a>
+        {% if genre|lower == current_genre|lower %}
+          <a href="?genre={{ genre }}" class="btn btn-primary active">{{ genre }}</a>
         {% else %}
-          <a href="?genre={{ genre|lower }}" class="btn btn-outline-primary">{{ genre }}</a>
+          <a href="?genre={{ genre }}" class="btn btn-outline-primary">{{ genre }}</a>
         {% endif %}
       {% endfor %}
     </div>
@@ -52,14 +50,4 @@
         {% endfor %}
     </div>
 </div>
-
-<!-- ✅ Optional: Auto-hide message after 2 seconds -->
-<!-- <script>
-  setTimeout(() => {
-    const alerts = document.querySelectorAll('.alert');
-    alerts.forEach(alert => {
-      alert.classList.remove('show');
-    });
-  }, 2000); // hide after 2s
-</script> -->
 {% endblock %}

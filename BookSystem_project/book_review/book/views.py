@@ -1,56 +1,54 @@
-from django.shortcuts import redirect, render
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy, reverse
+from django.contrib import messages
 from .models import Book
 from .forms import BookForm
-from django.contrib import messages
-# Create your views here.
 
-def book_create(request):
-    if request.method == 'POST':
-        form=BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request,'Book created successfully')
-            return redirect('book-list')
-    else:
-        form=BookForm()
-    return  render(request,'book/book_form.html',{'form':form})
+class BookBaseView:
+    model = Book
+    form_class = BookForm
+    context_object_name = 'book'
 
-def book_list(request):
-    genre_filter = request.GET.get('genre', 'all')  # get ?genre=fiction etc.
-    
-    if genre_filter == 'all':
-        books = Book.objects.all().order_by('-created_at')
-    else:
-        books = Book.objects.filter(genre__iexact=genre_filter).order_by('-created_at')
+class BookCreateView(SuccessMessageMixin, BookBaseView, CreateView):
+    template_name = 'book/book_form.html'
+    success_message = 'Book created successfully'
 
-    genres = ['All', 'Fiction', 'Non-Fiction', 'History', 'Art', 'Science']
+    def get_success_url(self):
+        return reverse('book-list')
 
-    return render(request, 'book/book_list.html', {
-        'books': books,
-        'genres': genres,
-        'current_genre': genre_filter,
-    })
+class BookDetailView(BookBaseView, DetailView):
+    template_name = 'book/book_detail.html'
 
+class BookUpdateView(SuccessMessageMixin, BookBaseView, UpdateView):
+    template_name = 'book/book_form.html'
+    success_message = 'Book updated successfully'
 
-def book_detail(request,pk):
-    book=Book.objects.get(pk=pk)
-    return render(request,'book/book_detail.html',{'book':book})
+    def get_success_url(self):
+        return reverse('book-detail', kwargs={'pk': self.object.pk})
 
-def book_update(request,pk):
-    book=Book.objects.get(pk=pk)
-    if request.method == 'POST':
-        form=BookForm(request.POST,instance=book)
-        if form.is_valid():
-            form.save()
-            messages.success(request,'Book updated successfully')
-            return redirect('book-detail',pk=book.pk)
-    else:
-        form=BookForm(instance=book)
-    return  render(request,'book/book_form.html',{'form':form})
-    
-def book_delete(request,pk):
-     book=Book.objects.get(pk=pk)
-     book.delete()
-     messages.success(request,'Book deleted successfully')
-     return redirect('book-list')
-     
+class BookDeleteView(SuccessMessageMixin, BookBaseView, DeleteView):
+    template_name = 'book/book_confirm_delete.html'
+    success_message = 'Book deleted successfully'
+    success_url = reverse_lazy('book-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'book/book_list.html'
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        genre_filter = self.request.GET.get('genre', 'All')
+        if genre_filter.lower() == 'all':
+            return Book.objects.all().order_by('-created_at')
+        return Book.objects.filter(genre__iexact=genre_filter).order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genres'] = ['All', 'Fiction', 'Non-Fiction', 'History', 'Art', 'Science']
+        context['current_genre'] = self.request.GET.get('genre', 'All')
+        return context

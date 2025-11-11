@@ -1,5 +1,9 @@
 {% extends 'book/base.html' %}
 
+{% block title %}
+    {{ book.title }} – Details
+{% endblock title %}
+
 {% block content %}
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -8,17 +12,25 @@
                 <div class="card-body">
                     <h3 class="card-title">{{ book.title }}</h3>
                     <h5 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h5>
-                   
+
                     <ul class="list-group list-group-flush mb-3">
-                        <li class="list-group-item"><strong>Description: </strong>{{ book.description }}</li>
+                        {% if book.description %}
+                        <li class="list-group-item"><strong>Description:</strong> {{ book.description }}</li>
+                        {% endif %}
                         <li class="list-group-item"><strong>Genre:</strong> {{ book.genre }}</li>
+                        {% if book.isbn %}
                         <li class="list-group-item"><strong>ISBN:</strong> {{ book.isbn }}</li>
+                        {% endif %}
+                        {% if book.publication_date %}
                         <li class="list-group-item"><strong>Publication Date:</strong> {{ book.publication_date }}</li>
-   
+                        {% endif %}
                     </ul>
-                    <a href="{% url 'book-update' book.pk %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url  'book-delete' book.pk %}" class="btn btn-danger">Delete</a>
-                    <a href="{% url 'book-list' %}" class="btn btn-secondary">Back to Books</a>
+
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'book-update' book.pk %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'book-delete' book.pk %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'book-list' %}" class="btn btn-secondary">Back to Books</a>
+                    </div>
                 </div>
             </div>
         </div>

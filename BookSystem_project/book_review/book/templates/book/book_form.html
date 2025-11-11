@@ -1,11 +1,17 @@
 {% extends "book/base.html" %}
 
 {% block title %}
-   
-{% endblock title %} 
+    {% if view.object.pk %}
+        Edit Book
+    {% else %}
+        Create Book
+    {% endif %}
+{% endblock title %}
 
-{% block  content %}
-  <!-- ✅ Message Section -->
+{% block content %}
+<div class="container mt-4">
+
+    <!-- ✅ Message Section -->
     {% if messages %}
         {% for message in messages %}
             <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
@@ -14,12 +20,21 @@
             </div>
         {% endfor %}
     {% endif %}
-<form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
-  
-  
+    <h2 class="mb-4">
+        {% if view.object.pk %}
+            Edit Book
+        {% else %}
+            Create Book
+        {% endif %}
+    </h2>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'book-list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+
+</div>
 {% endblock %}

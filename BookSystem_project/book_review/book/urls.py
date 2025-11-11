@@ -1,10 +1,16 @@
-from django.urls import path # type: ignore
-from book import views
+from django.urls import path
+from book.views import (
+    BookListView,
+    BookCreateView,
+    BookDetailView,
+    BookUpdateView,
+    BookDeleteView,
+)
 
 urlpatterns = [
-    path("", views.book_list, name="book-list"),
-    path("create/", views.book_create, name="book-create"),
-    path("detail/<int:pk>/", views.book_detail, name="book-detail"),
-    path("detail/<int:pk>/edit/", views.book_update, name="book-update"),
-    path("detail/<int:pk>/delete/", views.book_delete, name="book-delete"),
+    path("", BookListView.as_view(), name="book-list"),
+    path("create/", BookCreateView.as_view(), name="book-create"),
+    path("detail/<int:pk>/", BookDetailView.as_view(), name="book-detail"),
+    path("detail/<int:pk>/edit/", BookUpdateView.as_view(), name="book-update"),
+    path("detail/<int:pk>/delete/", BookDeleteView.as_view(), name="book-delete"),
 ]
